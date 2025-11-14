@@ -2,10 +2,10 @@
                    LICENSE AGREEMENT
 ==========================================================
 
-Website Name: Aaditya Jha Portfolio
+Website Name: Aaditya Jha 00
 Website URL: https://aadityajha00.github.io
 Author: Aaditya Jha
-Location: Malangwa, Sarlahi, Nepal
+Location: Sarlahi, Madhesh Pradesh, Nepal
 Last Updated: November 2025
 
 ----------------------------------------------------------
@@ -68,3 +68,4 @@ damages, or other liability arising from the use of this website.
 ==========================================================
 End of License Agreement
 ==========================================================
+
