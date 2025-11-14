@@ -1,94 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Glowing Heart Animation</title>
-  <style>
-    body { margin: 0; overflow: hidden; background: black; }
-    canvas { display: block; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Heart animation page - Aaditya Jha">
+<title>Aaditya Jha | Heart Animation</title>
+<link rel="icon" href="assets/images/logo.png">
+<style>
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===== HEART ===== */
+.heart {
+  position: relative;
+  width: 100px;
+  height: 90px;
+  transform: rotate(-45deg);
+  animation: pulse 1s infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 90px;
+  background: linear-gradient(135deg, #ff4d6d, #ff1a75);
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -50px;
+  left: 0;
+}
+
+.heart::after {
+  left: 50px;
+  top: 0;
+}
+
+/* ===== PULSING ANIMATION ===== */
+@keyframes pulse {
+  0% { transform: rotate(-45deg) scale(1); }
+  25% { transform: rotate(-45deg) scale(1.1); }
+  50% { transform: rotate(-45deg) scale(1); }
+  75% { transform: rotate(-45deg) scale(1.1); }
+  100% { transform: rotate(-45deg) scale(1); }
+}
+
+/* ===== OPTIONAL GLOW ===== */
+.heart-glow {
+  box-shadow: 0 0 20px #ff4d6d, 0 0 40px #ff1a75, 0 0 60px #ff4d6d;
+  animation: glowPulse 1.5s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px #ff4d6d, 0 0 40px #ff1a75, 0 0 60px #ff4d6d; }
+  50% { box-shadow: 0 0 40px #ff4d6d, 0 0 80px #ff1a75, 0 0 120px #ff4d6d; }
+}
+
+/* ===== CENTER CONTENT ===== */
+h1 {
+  position: absolute;
+  top: 20%;
+  color: #ff4d6d;
+  font-size: 36px;
+  text-align: center;
+  width: 100%;
+  text-shadow: 0 0 10px #ff1a75;
+}
+</style>
 </head>
 <body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-<script>
- 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  camera.position.z = 50;
-
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
-
- 
-  function createHeartPath(particleIndex, totalParticles) {
-    const t = (particleIndex / totalParticles) * Math.PI * 2;
-    const scale = 2.2;
-
-    let x = 16 * Math.pow(Math.sin(t), 3);
-    let y = 13 * Math.cos(t) - 5 * Math.cos(2 * t)
-          - 2 * Math.cos(3 * t) - Math.cos(4 * t);
-
-    const finalX = x * scale;
-    const finalY = y * scale;
-    const z = Math.sin(t * 4) * 2;
-
-    const jitterStrength = 0.2;
-
-    return new THREE.Vector3(
-      finalX + (Math.random() - 0.5) * jitterStrength,
-      finalY + (Math.random() - 0.5) * jitterStrength,
-      z + (Math.random() - 0.5) * jitterStrength
-    );
-  }
-
-
-  const totalParticles = 2000;
-  const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(totalParticles * 3);
-
-  for (let i = 0; i < totalParticles; i++) {
-    const pos = createHeartPath(i, totalParticles);
-    positions[i * 3] = pos.x;
-    positions[i * 3 + 1] = pos.y;
-    positions[i * 3 + 2] = pos.z;
-  }
-
-  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-
-  const material = new THREE.PointsMaterial({
-    size: 0.2,
-    color: 0x00ffcc,
-    transparent: true,
-    opacity: 0.9,
-    blending: THREE.AdditiveBlending
-  });
-
-  const particleSystem = new THREE.Points(geometry, material);
-  scene.add(particleSystem);
-
-
-  function animate() {
-    requestAnimationFrame(animate);
-    particleSystem.rotation.y += 0.002;
-    particleSystem.rotation.x += 0.001;
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-</script>
+<h1>❤ Love from Aaditya ❤</h1>
+<div class="heart heart-glow"></div>
 
 </body>
 </html>
