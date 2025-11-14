@@ -1,213 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Official landing page of Aaditya Jha - Portfolio website." />
-  <title>Aaditya Jha | Landing Page</title>
-  <link rel="icon" href="assets/images/logo.png" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <style>
-    /* ======== BASIC STYLES ======== */
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f9f9f9;
-      color: #222;
-    }
-    header {
-      background: #111;
-      color: #fff;
-      padding: 15px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    header h1 {
-      font-size: 22px;
-      letter-spacing: 1px;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #00bcd4;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Official landing page of Aaditya Jha - Portfolio website." />
+<title>Aaditya Jha | Landing Page</title>
+<link rel="icon" href="assets/images/logo.png" />
 
-    /* ======== HERO SECTION ======== */
-    .hero {
-      height: 90vh;
-      background: linear-gradient(to bottom right, #0099ff, #004d99);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-    .hero h2 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 18px;
-      max-width: 600px;
-    }
-    .hero button {
-      margin-top: 25px;
-      padding: 12px 25px;
-      font-size: 16px;
-      background: white;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      color: #004d99;
-      transition: 0.3s;
-    }
-    .hero button:hover {
-      background: #00bcd4;
-      color: white;
-    }
+<style>
+  /* ===== BASE STYLES ===== */
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f0f8ff;
+    color: #222;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; }
 
-    /* ======== ABOUT SECTION ======== */
-    .about {
-      padding: 60px 10%;
-      text-align: center;
-      background: #fff;
-    }
-    .about h3 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    .about p {
-      font-size: 17px;
-      color: #555;
-      line-height: 1.7;
-    }
+  /* ===== HEADER ===== */
+  header {
+    background: #111;
+    color: #fff;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  header h1 { font-size: 22px; letter-spacing: 1px; }
+  nav a {
+    color: white;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+  }
+  nav a:hover { color: #00bcd4; transform: scale(1.05); }
 
-    /* ======== SKILLS SECTION ======== */
-    .skills {
-      background: #eaf6ff;
-      padding: 60px 10%;
-      text-align: center;
-    }
-    .skills h3 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    .skill-boxes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-    .skill {
-      background: white;
-      border-radius: 10px;
-      padding: 25px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-    .skill:hover {
-      transform: translateY(-5px);
-    }
+  /* ===== HERO ===== */
+  .hero {
+    height: 90vh;
+    background: linear-gradient(135deg, #0099ff, #004d99);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero h2 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    animation: fadeInDown 1s ease forwards;
+    opacity: 0;
+  }
+  .hero h2 span { color: #00ffff; }
+  .hero p {
+    font-size: 18px;
+    max-width: 600px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    animation: fadeInUp 1s ease 0.5s forwards;
+    opacity: 0;
+  }
+  .hero button {
+    padding: 12px 30px;
+    font-size: 16px;
+    background: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #004d99;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: fadeInUp 1s ease 1s forwards;
+    opacity: 0;
+  }
+  .hero button:hover {
+    background: #00bcd4;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
 
-    /* ======== CONTACT SECTION ======== */
-    .contact {
-      padding: 60px 10%;
-      text-align: center;
-      background: #fff;
-    }
-    .contact h3 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-    .social-links a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #004d99;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    .social-links a:hover {
-      color: #00bcd4;
-    }
+  /* ===== FLOATING PARTICLES ===== */
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    animation: float 10s linear infinite;
+  }
 
-    /* ======== FOOTER ======== */
-    footer {
-      background: #111;
-      color: #ccc;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-    }
-  </style>
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0); opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+  }
+
+  @keyframes fadeInDown {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(-20px); }
+  }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    padding: 80px 10%;
+    text-align: center;
+    background: #fff;
+  }
+  .about h3 { font-size: 32px; margin-bottom: 25px; color: #004d99; }
+  .about p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+  .about.visible p { opacity: 1; transform: translateY(0); }
+
+  /* ===== SKILLS ===== */
+  .skills {
+    background: #eaf6ff;
+    padding: 80px 10%;
+    text-align: center;
+  }
+  .skills h3 { font-size: 32px; margin-bottom: 30px; color: #004d99; }
+  .skill-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+  .skill {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .skill.visible { opacity: 1; transform: translateY(0); }
+  .skill h4 { font-size: 20px; margin-bottom: 10px; color: #004d99; }
+  .skill p { font-size: 15px; color: #555; }
+  .skill:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    padding: 80px 10%;
+    text-align: center;
+    background: #fff;
+  }
+  .contact h3 { font-size: 32px; margin-bottom: 25px; color: #004d99; }
+  .social-links { margin-bottom: 20px; }
+  .social-links a {
+    margin: 0 12px;
+    font-weight: 600;
+    color: #004d99;
+    transition: color 0.3s, transform 0.3s;
+    display: inline-block;
+  }
+  .social-links a:hover { color: #00bcd4; transform: scale(1.3); }
+  .contact p a { color: #00bcd4; font-weight: 600; text-decoration: underline; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #111;
+    color: #ccc;
+    text-align: center;
+    padding: 25px;
+    font-size: 14px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero h2 { font-size: 36px; }
+    .hero p { font-size: 16px; }
+    .about h3, .skills h3, .contact h3 { font-size: 28px; }
+  }
+  @media (max-width: 480px) {
+    .hero h2 { font-size: 28px; }
+    .hero button { padding: 10px 20px; }
+  }
+</style>
 </head>
+
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header>
-    <h1>Aaditya Jha</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="landing.html">Landing</a>
-      <a href="generic.html">About</a>
-      <a href="elements.html">Elements</a>
-      <a href="login.html">Contact</a>
-    </nav>
-  </header>
+<!-- ===== HEADER ===== -->
+<header>
+  <h1>Aaditya Jha</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="landing.html">Landing</a>
+    <a href="generic.html">About</a>
+    <a href="elements.html">Elements</a>
+    <a href="login.html">Contact</a>
+  </nav>
+</header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <h2>Hello, I’m <span style="color:#00ffff;">Aaditya Jha</span></h2>
-    <p>A passionate +2 Science (Computer) student and creative thinker who loves developing new things. Welcome to my world of innovation and technology.</p>
-    <button onclick="window.location.href='login.html'">Get in Touch</button>
-  </section>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <h2>Hello, I’m <span>Aaditya Jha</span></h2>
+  <p>A passionate +2 Science (Computer) student and creative thinker who loves developing new things. Welcome to my world of innovation and technology.</p>
+  <button onclick="window.location.href='login.html'">Get in Touch</button>
 
-  <!-- ===== ABOUT ===== -->
-  <section class="about">
-    <h3>About Me</h3>
-    <p>
-      I’m a motivated student from Sarlahi, Madhesh Pradesh,(Nepal) currently studying Science (Computer) in Kathmandu Valley. 
-      I enjoy exploring technology, programming, and designing projects that solve real-world problems.
-    </p>
-  </section>
+  <!-- Floating particles -->
+  <div class="particle" style="width:15px;height:15px;left:10%;animation-delay:0s;"></div>
+  <div class="particle" style="width:20px;height:20px;left:50%;animation-delay:2s;"></div>
+  <div class="particle" style="width:12px;height:12px;left:80%;animation-delay:4s;"></div>
+  <div class="particle" style="width:10px;height:10px;left:30%;animation-delay:1s;"></div>
+  <div class="particle" style="width:18px;height:18px;left:70%;animation-delay:3s;"></div>
+</section>
 
-  <!-- ===== SKILLS ===== -->
-  <section class="skills">
-    <h3>My Skills</h3>
-    <div class="skill-boxes">
-      <div class="skill"><h4>💻 Web Development</h4><p>HTML, CSS, and JS for building clean, responsive designs.</p></div>
-      <div class="skill"><h4>⚙ Programming</h4><p>C, Python, and beginner-level robotics understanding.</p></div>
-      <div class="skill"><h4>🎨 Creativity</h4><p>Creating unique digital ideas and turning them into reality.</p></div>
-      <div class="skill"><h4>🚀 Innovation</h4><p>Developing simple projects that can help Nepal move forward technologically.</p></div>
-    </div>
-  </section>
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <h3>About Me</h3>
+  <p>I’m a motivated student from Sarlahi, Madhesh Pradesh, Nepal, currently studying Science (Computer) in Kathmandu Valley. I enjoy exploring technology, programming, and designing projects that solve real-world problems.</p>
+</section>
 
-  <!-- ===== CONTACT ===== -->
-  <section class="contact">
-    <h3>Connect With Me</h3>
-    <div class="social-links">
-      <a href="https://www.facebook.com/share/1D71yckcG2/" target="_blank">Facebook</a> |
-      <a href="https://www.instagram.com/jha.aaditya_?igsh=MWdyZDFwbXVjb2JkdQ==" target="_blank">Instagram</a> |
-      <a href="https://wa.me/9779840688748" target="_blank">WhatsApp</a> |
-      <a href="https://https://www.tiktok.com/@aadii.tya?_r=1&_t=ZS-91G7TTSMQ1h" target="_blank">TikTok</a>
-    </div>
-    <p>Or use the <a href="login.html">contact form</a> to send me a direct message!</p>
-  </section>
+<!-- ===== SKILLS ===== -->
+<section class="skills" id="skills">
+  <h3>My Skills</h3>
+  <div class="skill-boxes">
+    <div class="skill">💻<h4>Web Development</h4><p>HTML, CSS, JavaScript to build responsive and modern websites.</p></div>
+    <div class="skill">⚙<h4>Programming</h4><p>C, Python, and beginner robotics for creative solutions.</p></div>
+    <div class="skill">🎨<h4>Creativity</h4><p>Transforming ideas into functional digital projects.</p></div>
+    <div class="skill">🚀<h4>Innovation</h4><p>Developing small solutions to help Nepal technologically advance.</p></div>
+  </div>
+</section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer>
-    © 2025 Aaditya Jha | Designed & Developed by Aaditya Jha
-  </footer>
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <h3>Connect With Me</h3>
+  <div class="social-links">
+    <a href="https://www.facebook.com/share/1D71yckcG2/" target="_blank">Facebook</a>
+    <a href="https://www.instagram.com/jha.aaditya_?igsh=MWdyZDFwbXVjb2JkdQ==" target="_blank">Instagram</a>
+    <a href="https://wa.me/9779840688748" target="_blank">WhatsApp</a>
+    <a href="https://www.tiktok.com/@aadii.tya?_r=1&_t=ZS-91G7TTSMQ1h" target="_blank">TikTok</a>
+  </div>
+  <p>Or use the <a href="login.html">contact form</a> to send me a direct message!</p>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  © 2025 Aaditya Jha | Designed & Developed by Aaditya Jha
+</footer>
+
+<!-- ===== ANIMATION SCRIPT ===== -->
+<script>
+  // Fade in sections on scroll
+  const sections = document.querySelectorAll('.about, .skill');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  sections.forEach(sec => observer.observe(sec));
+</script>
 
 </body>
 </html>
