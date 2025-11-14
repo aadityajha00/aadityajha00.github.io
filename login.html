@@ -1,64 +1,46 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Login or Register - Aaditya Jha Portfolio" />
-  <title>Login | Aaditya Jha</title>
+  <meta name="description" content="Aaditya Jha Portfolio Website - Login" />
+  <title>Aaditya Jha | Login</title>
+  <link rel="icon" href="assets/images/logo.png" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Poppins", sans-serif;
-    }
-
     body {
-      background: linear-gradient(135deg, #004d99, #00b4db);
-      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #004d99, #0099ff);
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #fff;
     }
 
-    .container {
+    .login-container {
       background: #fff;
-      width: 400px;
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      color: #222;
+      padding: 40px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
       text-align: center;
-      transition: 0.3s ease;
     }
 
-    .container h2 {
+    h2 {
+      margin-bottom: 20px;
       color: #004d99;
-      margin-bottom: 20px;
-      font-size: 28px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 6px;
     }
 
     input {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
+      padding: 12px;
+      margin: 10px 0;
       border-radius: 8px;
-      font-size: 15px;
-    }
-
-    input:focus {
-      border-color: #00b4db;
-      outline: none;
+      border: 1px solid #ccc;
+      font-size: 14px;
     }
 
     button {
@@ -66,123 +48,143 @@
       padding: 12px;
       background: #004d99;
       color: #fff;
-      font-size: 16px;
-      font-weight: 600;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
       transition: 0.3s;
     }
 
     button:hover {
-      background: #007bff;
+      background: #00bcd4;
+      color: #fff;
     }
 
-    .switch {
+    #message {
       margin-top: 15px;
-      font-size: 14px;
-    }
-
-    .switch a {
-      color: #004d99;
-      text-decoration: none;
       font-weight: 600;
     }
 
-    .switch a:hover {
+    .toggle-login {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .toggle-login span {
+      color: #004d99;
+      font-weight: 600;
       text-decoration: underline;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    @media (max-width: 500px) {
-      .container {
-        width: 90%;
-        padding: 30px 20px;
-      }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2 id="formTitle">Login</h2>
+  <div class="login-container">
+    <h2 id="form-title">Login</h2>
 
-    <!-- LOGIN FORM -->
-    <form id="loginForm">
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" id="loginEmail" placeholder="Enter your email" required>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="loginPassword" placeholder="Enter your password" required>
-      </div>
-      <button type="submit">Login</button>
-      <div class="switch">
-        Don't have an account? <a href="#" id="showRegister">Register</a>
-      </div>
-    </form>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
 
-    <!-- REGISTER FORM -->
-    <form id="registerForm" class="hidden">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="regName" placeholder="Enter your full name" required>
-      </div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" id="regEmail" placeholder="Enter your email" required>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="regPassword" placeholder="Create a password" required>
-      </div>
-      <button type="submit">Register</button>
-      <div class="switch">
-        Already have an account? <a href="#" id="showLogin">Login</a>
-      </div>
-    </form>
+    <button id="action-btn">Login</button>
+
+    <p id="message"></p>
+
+    <div class="toggle-login">
+      <span id="toggle-link">Don't have an account? Sign Up</span>
+    </div>
   </div>
 
-  <script>
-    const loginForm = document.getElementById("loginForm");
-    const registerForm = document.getElementById("registerForm");
-    const showRegister = document.getElementById("showRegister");
-    const showLogin = document.getElementById("showLogin");
-    const formTitle = document.getElementById("formTitle");
+  <!-- Firebase Authentication Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-    showRegister.addEventListener("click", () => {
-      loginForm.classList.add("hidden");
-      registerForm.classList.remove("hidden");
-      formTitle.textContent = "Register";
+    // Your Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAos3HZUfo49pLQEIwGc2mOlrdErMI95J0",
+      authDomain: "aadityajha00.firebaseapp.com",
+      projectId: "aadityajha00",
+      storageBucket: "aadityajha00.firebasestorage.app",
+      messagingSenderId: "953486639095",
+      appId: "1:953486639095:web:0e23e9a917c4b6fd27f8f2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Elements
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const actionBtn = document.getElementById("action-btn");
+    const messageEl = document.getElementById("message");
+    const formTitle = document.getElementById("form-title");
+    const toggleLink = document.getElementById("toggle-link");
+
+    let isLogin = true;
+
+    function login() {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          messageEl.style.color = "green";
+          messageEl.innerText = "Login successful!";
+          setTimeout(() => window.location.href = "index.html", 1000);
+        })
+        .catch(error => {
+          messageEl.style.color = "red";
+          messageEl.innerText = error.message;
+        });
+    }
+
+    function signup() {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          messageEl.style.color = "green";
+          messageEl.innerText = "Account created! You can login now.";
+          isLogin = true;
+          updateForm();
+        })
+        .catch(error => {
+          messageEl.style.color = "red";
+          messageEl.innerText = error.message;
+        });
+    }
+
+    function updateForm() {
+      if(isLogin){
+        formTitle.innerText = "Login";
+        actionBtn.innerText = "Login";
+        toggleLink.innerHTML = "Don't have an account? <span>Sign Up</span>";
+      } else {
+        formTitle.innerText = "Sign Up";
+        actionBtn.innerText = "Sign Up";
+        toggleLink.innerHTML = "Already have an account? <span>Login</span>";
+      }
+    }
+
+    actionBtn.addEventListener("click", () => {
+      messageEl.innerText = "";
+      if(isLogin){
+        login();
+      } else {
+        signup();
+      }
     });
 
-    showLogin.addEventListener("click", () => {
-      registerForm.classList.add("hidden");
-      loginForm.classList.remove("hidden");
-      formTitle.textContent = "Login";
-    });
-
-   
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("Login feature is not active yet. (GitHub Pages can't save accounts)");
-    });
-
-    registerForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("Registration feature is not active yet. To enable, connect Firebase backend.");
+    toggleLink.addEventListener("click", () => {
+      isLogin = !isLogin;
+      messageEl.innerText = "";
+      updateForm();
     });
   </script>
-  <h2>Login</h2>
-<input id="email" type="email" placeholder="Email"><br>
-<input id="password" type="password" placeholder="Password"><br>
-<button onclick="login()">Login</button>
-<button onclick="signup()">Sign Up</button>
 
-<p id="message"></p>
 </body>
 </html>
