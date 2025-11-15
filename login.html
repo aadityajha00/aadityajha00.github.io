@@ -74,7 +74,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
-// Elements
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const username = document.getElementById('username');
@@ -94,7 +93,6 @@ const logoutBtnNav = document.getElementById('logoutBtnNav');
 let isLogin = true;
 let selectedFile = null;
 
-// Preview profile image
 profilePic.addEventListener('change', (e)=>{
   selectedFile = e.target.files[0];
   if(selectedFile){
@@ -103,7 +101,6 @@ profilePic.addEventListener('change', (e)=>{
   }
 });
 
-// Toggle login/register
 toggleForm.addEventListener('click', ()=>{
   isLogin = !isLogin;
   if(isLogin){
@@ -122,7 +119,6 @@ toggleForm.addEventListener('click', ()=>{
   }
 });
 
-// Submit button
 submitBtn.addEventListener('click', async ()=>{
   if(isLogin){
     // LOGIN
@@ -133,7 +129,6 @@ submitBtn.addEventListener('click', async ()=>{
       alert('Login Error: '+e.message);
     }
   } else {
-    // REGISTER
     try{
       const userCredential = await createUserWithEmailAndPassword(auth,email.value,password.value);
       let photoURL = '';
@@ -153,7 +148,6 @@ submitBtn.addEventListener('click', async ()=>{
   }
 });
 
-// Firebase auth state
 onAuthStateChanged(auth,user=>{
   if(user){
     loginBtnNav.style.display='none';
@@ -166,7 +160,6 @@ onAuthStateChanged(auth,user=>{
   }
 });
 
-// Logout
 logoutBtnNav.addEventListener('click', ()=> signOut(auth));
 loginBtnNav.addEventListener('click', ()=> alert('Use the form to login/register.'));
 </script>
