@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aaditya Jha Portfolio - Home">
-  <title>Aaditya Jha | Home</title>
-  <link rel="icon" href="assets/images/logo.png">
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Aaditya Jha - Skills and Services Portfolio">
+<title>Aaditya Jha | Skills & Services</title>
+<link rel="icon" href="assets/images/logo.png">
+<style>
+  body {margin:0; font-family:'Poppins',sans-serif; background:#f9f9f9; color:#222;}
+  header {background:#111; color:#fff; display:flex; justify-content:space-between; align-items:center; padding:15px 6%; position:sticky; top:0; z-index:1000;}
+  header h1 {font-size:22px;}
+  nav a {color:#fff; text-decoration:none; margin-left:20px; font-weight:500; transition:0.3s;}
+  nav a:hover, nav a.active {color:#00bcd4;}
+  .hero {height:70vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; background:linear-gradient(to bottom right,#004d99,#0099ff); color:#fff;}
+  .hero h2 {font-size:42px;}
+  .skills-section {padding:60px 10%; text-align:center; background:#eaf6ff;}
+  .skills-section h3 {font-size:28px; margin-bottom:20px; color:#004d99;}
+  .skill-cards {display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:25px; margin-top:30px;}
+  .skill-card {background:white; border-radius:12px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,0.1); transition:transform 0.3s;}
+  .skill-card:hover {transform:translateY(-7px);}
+  .skill-card h4 {margin-bottom:10px;}
+  footer {background:#111; color:#ccc; text-align:center; padding:20px; font-size:14px;}
+  footer ul.icons {margin-bottom:10px; list-style:none; display:flex; justify-content:center; gap:15px;}
+  footer ul.icons li a {color:#ccc; font-size:20px; text-decoration:none; transition:0.3s;}
+  footer ul.icons li a:hover {color:#00bcd4;}
+  footer a {color:#00bcd4; text-decoration:none;}
+</style>
 </head>
 <body>
 
@@ -14,15 +33,16 @@
 <header>
   <h1>Aaditya Jha</h1>
   <nav>
-    <a href="index.html" class="active">Home</a>
+    <a href="index.html">Home</a>
     <a href="landing.html">Landing</a>
     <a href="generic.html">About</a>
-    <a href="elements.html">Elements</a>
+    <a href="elements.html" class="active">Skills</a>
+    <a href="login.html">Contact</a>
     <span id="authButtons">
       <button id="loginBtn" style="margin-left:20px;">Login</button>
     </span>
     <span id="profile" style="display:none;">
-      <img id="profilePic" src="" alt="Profile">
+      <img id="profilePic" src="" alt="Profile" style="border-radius:50%; width:40px; height:40px; margin-right:10px;">
       <span id="profileName"></span>
       <button id="logoutBtn">Logout</button>
     </span>
@@ -31,48 +51,38 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <h2>Hello, I’m Aaditya Jha</h2>
-  <p>+2 Science (Computer) student | Passionate about technology, programming, and creating new things</p>
-  <button onclick="window.location.href='login.html'">Get in Touch</button>
+  <h2>My Skills & Services</h2>
+  <p>Here’s what I can do for you — coding, web development, robotics, and creative solutions.</p>
 </section>
 
-<!-- ===== SKILLS ===== -->
-<section class="skills-preview">
+<!-- ===== SKILLS & SERVICES ===== -->
+<section class="skills-section">
   <h3>My Skills</h3>
-  <p>Web Development | Programming (C, Python) | Robotics | Creativity | Innovation</p>
-</section>
-
-<!-- ===== CONTACT ===== -->
-<section id="contact">
-  <h3>Contact Me</h3>
-  <form action="https://formspree.io/f/xeovjvqg" method="POST">
-    <label>Your email:
-      <input type="email" name="email" required>
-    </label>
-    <label>Your message:
-      <textarea name="message" required></textarea>
-    </label>
-    <button type="submit">Send</button>
-  </form>
-  <div class="contact-methods">
-    <div>
-      <h3>Email</h3>
-      <a href="mailto:jhaaaditya00@gmail.com">jhaaaditya00@gmail.com</a>
+  <div class="skill-cards">
+    <div class="skill-card">
+      <h4>💻 Web Development</h4>
+      <p>Responsive websites using HTML, CSS, JavaScript, and modern frameworks.</p>
     </div>
-    <div>
-      <h3>Phone</h3>
-      <span>(+977 9840688748)</span>
+    <div class="skill-card">
+      <h4>⚙ Programming</h4>
+      <p>Proficient in C, Python, and creating small-scale robotics projects.</p>
     </div>
-    <div>
-      <h3>Address</h3>
-      <span>Sarlahi, Madhesh Pradesh, Nepal</span>
+    <div class="skill-card">
+      <h4>🎨 Creativity</h4>
+      <p>Designing innovative projects, graphics, and digital solutions.</p>
     </div>
-  </div>
-  <div class="social-links">
-    <a href="https://www.facebook.com/share/1D71yckcG2/" target="_blank">Facebook</a> |
-    <a href="https://www.instagram.com/jha.aaditya_?igsh=MWdyZDFwbXVjb2JkdQ==" target="_blank">Instagram</a> |
-    <a href="https://wa.me/9779840688748" target="_blank">WhatsApp</a> |
-    <a href="https://www.tiktok.com/@aadii.tya?_r=1&_t=ZS-91G7TTSMQ1h" target="_blank">TikTok</a>
+    <div class="skill-card">
+      <h4>🚀 Innovation</h4>
+      <p>Developing practical and creative solutions for real-world problems in Nepal.</p>
+    </div>
+    <div class="skill-card">
+      <h4>🛠 Problem Solving</h4>
+      <p>Debugging, logical thinking, and implementing solutions efficiently.</p>
+    </div>
+    <div class="skill-card">
+      <h4>🤝 Collaboration</h4>
+      <p>Working with others to create better projects and team-based solutions.</p>
+    </div>
   </div>
 </section>
 
@@ -87,11 +97,11 @@
   <p>© 2025 Aaditya Jha | Designed & Developed by Aaditya Jha</p>
 </footer>
 
-<!-- ===== FIREBASE LOGIN & CONTACT SCRIPT ===== -->
+<!-- ===== FIREBASE LOGIN SCRIPT ===== -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAos3HZUfo49pLQEIwGc2mOlrdErMI95J0",
   authDomain: "aadityajha00.firebaseapp.com",
@@ -102,18 +112,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 const auth = getAuth(app);
-const form = document.querySelector("form");
-form.addEventListener("submit", async e=>{
-  e.preventDefault();
-  const email = form.email.value;
-  const message = form.message.value;
-  await addDoc(collection(db,"messages"), { email, message, timestamp:new Date() });
-  alert("Message sent successfully!");
-  form.reset();
-});
-
 
 const loginBtn = document.getElementById('loginBtn');
 const logoutBtn = document.getElementById('logoutBtn');
@@ -146,4 +145,3 @@ onAuthStateChanged(auth, user=>{
 
 </body>
 </html>
-
