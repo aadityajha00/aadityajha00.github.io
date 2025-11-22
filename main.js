@@ -1,0 +1,100 @@
+/* ================== Firebase imports ================== */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* ================== Firebase config ================== */
+const firebaseConfig = {
+  apiKey: "AIzaSyAos3HZUfo49pLQEIwGc2mOlrdErMI95J0",
+  authDomain: "aadityajha00.firebaseapp.com",
+  projectId: "aadityajha00",
+  storageBucket: "aadityajha00.firebasestorage.app",
+  messagingSenderId: "953486639095",
+  appId: "1:953486639095:web:0e23e9a917c4b6fd27f8f2"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const storage = getStorage(app);
+const db = getFirestore(app);
+
+/* ================== Reveal Animation ================== */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.12});
+revealEls.forEach(el => observer.observe(el));
+
+/* ================== Mobile Menu ================== */
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+menuToggle?.addEventListener('click', ()=>{
+  if(!mobileNav) return;
+  if(mobileNav.style.display==='block'){ mobileNav.style.display='none'; return; }
+  let html='';
+  document.querySelectorAll('nav a').forEach(a=> html+=`<a href="${a.getAttribute('href')}" class="mobile-link">${a.textContent}</a>`);
+  mobileNav.innerHTML = html; mobileNav.style.display='block';
+  mobileNav.querySelectorAll('.mobile-link').forEach(a=> a.addEventListener('click', ()=> mobileNav.style.display='none'));
+});
+
+/* ================== Contact Form (Firestore) ================== */
+const contactForm = document.getElementById('contactForm');
+if(contactForm){
+  contactForm.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const data = new FormData(contactForm);
+    try{
+      await addDoc(collection(db,'messages'), { 
+        email: data.get('email'), 
+        message: data.get('message'), 
+        createdAt: serverTimestamp() 
+      });
+      alert('✅ Message saved. Thank you!');
+      contactForm.reset();
+    }catch(err){
+      console.error(err); 
+      alert('Error: '+err.message);
+    }
+  });
+}
+
+/* ================== Active Nav Link on Scroll ================== */
+const navLinks = document.querySelectorAll('nav a');
+function onScroll(){
+  const fromTop = window.scrollY + 90;
+  navLinks.forEach(link=>{
+    const id = link.getAttribute('href');
+    if(!id.startsWith('#')) return;
+    const sec = document.querySelector(id);
+    if(!sec) return;
+    if(sec.offsetTop <= fromTop && sec.offsetTop + sec.offsetHeight > fromTop){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ================== Firebase Auth (Login/Register) ================== */
+const modalBackdrop = document.getElementById('modalBackdrop');
+const openLogin = document.getElementById('openLogin');
+const mLoginBtn = document.getElementById('mLoginBtn');
+const mRegisterBtn = document.getElementById('mRegisterBtn');
+
+if(openLogin) openLogin.addEventListener('click', ()=> modalBackdrop.style.display='flex');
+
+/* Handle user state */
+onAuthStateChanged(auth, user=>{
+  const profileWidget = document.getElementById('profileWidget');
+  const authButtons = document.getElementById('authButtons');
+  if(user){
+    if(profileWidget) profileWidget.style.display='flex';
+    if(authButtons) authButtons.style.display='none';
+    document.getElementById('navName').textContent = user.displayName || "User";
+    document.getElementById('navAvatar').src = user.photoURL || 'assets/images/placeholder.png';
+  }else{
+    if(profileWidget) profileWidget.style.display='none';
+    if(authButtons) authButtons.style.display='flex';
+  }
+});
