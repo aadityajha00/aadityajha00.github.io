@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aaditya Jha — Portfolio</title>
+  <link rel="icon" href="assets/images/logo.png" />
+  <meta name="description" content="Portfolio of Aaditya Jha — web, robotics, projects and contact.">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#061226; --accent1:#00d8ff; --accent2:#6a00ff;
+      --muted:rgba(230,238,246,0.85);
+      --glass:rgba(255,255,255,0.03);
+      --card:rgba(255,255,255,0.02);
+      --radius:14px; --max-width:1100px; --transition:320ms cubic-bezier(.2,.9,.3,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:linear-gradient(180deg,#021022 0%, #051126 60%);color:var(--muted);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* Header */
+    header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(2,6,12,0.45), rgba(2,6,12,0.12));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.02);}
+    .nav-inner{max-width:var(--max-width);margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:18px;margin:0;color:#fff}
+    nav{display:flex;gap:10px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600;transition:var(--transition)}
+    nav a:hover{background:rgba(255,255,255,0.02);color:#fff}
+    nav a.active{color:#fff;border-bottom:2px solid rgba(255,255,255,0.03)}
+    .nav-right{display:flex;align-items:center;gap:10px}
+
+    .menu-toggle{display:none;background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer}
+
+    @media (max-width:820px){
+      nav{display:none;position:absolute;left:12px;right:12px;top:64px;flex-direction:column;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,0.6)}
+      nav.open{display:flex}
+      .menu-toggle{display:inline-flex}
+    }
+
+    /* Hero */
+    .hero{min-height:86vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:48px 20px}
+    #particles-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
+    .hero-inner{position:relative;z-index:2;width:100%;max-width:var(--max-width);margin:0 auto;display:flex;gap:28px;align-items:center;justify-content:center;flex-wrap:wrap}
+    .hero-card{flex:1 1 520px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:34px;border-radius:var(--radius);box-shadow:0 10px 40px rgba(2,6,18,0.6);border:1px solid rgba(255,255,255,0.03);transition:var(--transition)}
+    .hero-card h2{font-size:30px;margin:0 0 8px;color:#fff}
+    .hero-card h2 span{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{color:rgba(230,238,246,0.85);line-height:1.6;margin-bottom:18px}
+
+    .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;border:0;cursor:pointer;font-weight:800;transition:var(--transition)}
+    .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#021017;box-shadow:0 8px 30px rgba(106,0,255,0.12)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .hero-visual{flex:0 0 420px;min-height:320px;border-radius:12px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,18,0.6);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .mock-login{width:240px;background:linear-gradient(180deg,#ffffff,#f5f7fb);color:#061219;padding:12px;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,0.25);text-align:left}
+    .mock-login h4{margin:0 0 8px;font-size:16px}
+    .mock-login .field{height:36px;border-radius:6px;background:#f5f7fb;margin-bottom:8px;padding:6px 8px;font-size:13px;border:1px solid rgba(0,0,0,0.06)}
+
+    /* Main */
+    main{max-width:var(--max-width);margin:36px auto;padding:0 20px}
+    .panel{background:var(--card);padding:22px;border-radius:12px;margin-bottom:18px;border:1px solid rgba(255,255,255,0.02)}
+    .section-title{display:flex;align-items:center;gap:12px;font-weight:700;color:#fff;margin:0 0 12px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .card{background:var(--glass);padding:16px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 6px 20px rgba(2,6,18,0.5)}
+
+    footer{padding:18px 20px;text-align:center;color:rgba(230,238,246,0.6)}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.7));z-index:120}
+    .modal{width:520px;max-width:94%;background:linear-gradient(180deg, rgba(6,18,30,0.95), rgba(3,11,20,0.98));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .modal h4{margin:0 0 12px;color:#fff}
+    .modal .row{display:flex;gap:8px;margin-bottom:8px}
+    .modal input[type="file"]{color:var(--muted)}
+    .modal input, .modal textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:var(--muted)}
+    .profile{display:flex;align-items:center;gap:10px;padding:6px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
+    .profile img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.03)}
+
+    /* Animations */
+    .reveal{opacity:0;transform:translateY(18px);transition:var(--transition)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .float{animation:float 6s ease-in-out infinite}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)}}
+
+    @media (max-width:900px){
+      .hero-inner{flex-direction:column}
+      .hero-visual{order:-1;width:100%;min-height:220px}
+    }
+
+    /* small helpers */
+    .muted{color:rgba(230,238,246,0.6)}
+    .center {display:flex;align-items:center;justify-content:center}
+    .hidden{display:none}
+    .toast{position:fixed;right:16px;bottom:18px;background:rgba(0,0,0,0.7);color:#fff;padding:10px 14px;border-radius:8px;z-index:300}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="nav-inner">
+      <div class="brand"><h1>Aaditya Jha</h1></div>
+
+      <button id="menuToggle" class="menu-toggle">Menu</button>
+
+      <nav id="topNav" aria-label="Primary navigation">
+        <a class="nav-link" href="#home">Landing</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-right">
+        <button id="openLogin" class="btn btn-ghost">Login / Register</button>
+
+        <div id="profileWidget" class="profile hidden" aria-hidden="true">
+          <img id="navAvatar" src="https://via.placeholder.com/40" alt="avatar">
+          <div style="display:flex;flex-direction:column;align-items:flex-start;">
+            <span id="navName" style="font-weight:700;color:#fff">User</span>
+            <button id="logoutBtn" class="btn btn-ghost" style="padding:6px 8px;font-size:12px">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero" aria-label="Hero section">
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div class="hero-card float">
+        <h2>Hello, I’m <span>Aaditya Jha</span></h2>
+        <p class="lead">+2 Science (Computer) student • I build clean websites, robotics prototypes and small automation solutions. Explore projects and get in touch.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Contact Me</a>
+          <a href="#projects" class="btn btn-ghost">See Projects</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="mock-login">
+          <h4>Welcome Back</h4>
+          <div class="field">Username</div>
+          <div class="field">Password</div>
+          <div style="display:flex;justify-content:center;margin-top:8px">
+            <div style="background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:8px 12px;border-radius:8px;color:#021017;font-weight:700">SIGN IN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <main>
+    <section id="about" class="panel reveal">
+      <h3 class="section-title">About</h3>
+      <p class="muted">I am a Computer science student & hobbyist — building websites and robotics projects. I focus on practical solutions and learning by doing.</p>
+    </section>
+
+    <section id="skills" class="panel reveal">
+      <h3 class="section-title">Skills</h3>
+      <div class="grid">
+        <div class="card"><strong>Web</strong><p>HTML • CSS • JavaScript • GitHub Pages</p></div>
+        <div class="card"><strong>Programming</strong><p>C • Python • Arduino</p></div>
+        <div class="card"><strong>Tools</strong><p>VSCode • Figma • Firebase</p></div>
+      </div>
+    </section>
+
+    <section id="projects" class="panel reveal">
+      <h3 class="section-title">Projects</h3>
+      <div class="grid" id="projectsGrid">
+        <!-- Example placeholder projects -->
+        <div class="card"><strong>Smart Wheelchair</strong><p>Voice-enabled wheelchair prototype - MCU + sensors.</p></div>
+        <div class="card"><strong>Portfolio</strong><p>Personal portfolio deployed to GitHub Pages with Firebase auth.</p></div>
+        <div class="card"><strong>Robotic Vacuum</strong><p>ESP32-based vacuum robot prototype (camera & sensors).</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="panel reveal">
+      <h3 class="section-title">Contact</h3>
+      <form id="contactForm">
+        <div style="display:grid;gap:8px;max-width:640px">
+          <input name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+          <div style="display:flex;gap:8px">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <div style="align-self:center;color:var(--muted)">Messages are saved to Firestore</div>
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> Aaditya Jha — Designed & Developed by Aaditya Jha</div>
+  </footer>
+
+  <!-- Mobile nav container (built by JS) -->
+  <div id="mobileNav" class="hidden" style="position:fixed;left:12px;right:12px;top:72px;z-index:90;display:none"></div>
+
+  <!-- Modal: Auth -->
+  <div id="modalBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <h4 id="authTitle">Account</h4>
+
+      <div style="display:grid;gap:10px;max-width:480px">
+        <!-- Login -->
+        <div>
+          <label class="muted">Login</label>
+          <input id="mLoginEmail" type="email" placeholder="Email">
+          <input id="mLoginPassword" type="password" placeholder="Password" style="margin-top:8px">
+          <button id="mLoginBtn" class="btn btn-primary" style="margin-top:8px">Login</button>
+        </div>
+
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03)">
+
+        <!-- Register -->
+        <div>
+          <label class="muted">Register</label>
+          <input id="mRegUsername" type="text" placeholder="Display name">
+          <input id="mRegEmail" type="email" placeholder="Email" style="margin-top:8px">
+          <input id="mRegPassword" type="password" placeholder="Password" style="margin-top:8px">
+          <label class="muted" style="font-size:13px;margin-top:8px">Upload avatar (optional)</label>
+          <input id="mRegAvatar" type="file" accept="image/*" style="margin-top:6px">
+          <button id="mRegisterBtn" class="btn btn-ghost" style="margin-top:8px">Register & Upload Avatar</button>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button id="mClose" class="btn-ghost">Close</button>
+          <button id="demoBtn" class="btn-ghost">Demo Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <!-- Firebase modular imports + app code -->
+  <script type="module">
+    /* ================== Firebase imports ================== */
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+      updateProfile, onAuthStateChanged, signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    /* ================== Firebase config (your project) ================== */
+    const firebaseConfig = {
+      apiKey: "AIzaSyAos3HZUfo49pLQEIwGc2mOlrdErMI95J0",
+      authDomain: "aadityajha00.firebaseapp.com",
+      projectId: "aadityajha00",
+      storageBucket: "aadityajha00.firebasestorage.app",
+      messagingSenderId: "953486639095",
+      appId: "1:953486639095:web:0e23e9a917c4b6fd27f8f2"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const storage = getStorage(app);
+    const db = getFirestore(app);
+
+    /* ================== Small UI helpers ================== */
+    const toastEl = document.getElementById('toast');
+    function toast(msg, timeout=3500){
+      toastEl.textContent = msg; toastEl.classList.remove('hidden'); setTimeout(()=>toastEl.classList.add('hidden'), timeout);
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ================== Reveal Animation (IntersectionObserver) ================== */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, {threshold:0.12});
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ================== Mobile Menu ================== */
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    menuToggle?.addEventListener('click', ()=>{
+      if(!mobileNav) return;
+      if(mobileNav.style.display==='block'){ mobileNav.style.display='none'; return; }
+      let html='';
+      document.querySelectorAll('#topNav a').forEach(a=> html+=`<a href="${a.getAttribute('href')}" class="mobile-link" style="display:block;padding:12px;border-radius:8px;color:var(--muted);text-decoration:none">${a.textContent}</a>`);
+      mobileNav.innerHTML = `<div style="background:var(--card);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)">${html}</div>`;
+      mobileNav.style.display='block';
+      mobileNav.querySelectorAll('.mobile-link').forEach(a=> a.addEventListener('click', ()=> mobileNav.style.display='none'));
+    });
+
+    /* ================== Particles (canvas) ================== */
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext && canvas.getContext('2d');
+    let particles = [];
+    function resizeCanvas(){
+      if(!ctx) return;
+      canvas.width = window.innerWidth;
+      canvas.height = Math.max(window.innerHeight * 0.9, 320);
+    }
+    function initParticles(){
+      if(!ctx) return;
+      particles = [];
+      const count = Math.min(100, Math.floor(window.innerWidth / 12));
+      for(let i=0;i<count;i++){
+        particles.push({
+          x: Math.random()*canvas.width,
+          y: Math.random()*canvas.height,
+          r: 1 + Math.random()*3,
+          vx: (Math.random()-0.5)*0.4,
+          vy: -0.1 - Math.random()*0.6,
+          alpha: 0.04 + Math.random()*0.18,
+          hue: 180 + Math.random()*120
+        });
+      }
+    }
+    function drawParticles(){
+      if(!ctx) return;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.fillStyle = `hsla(${p.hue},90%,60%,${p.alpha})`;
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        if(p.y + p.r < 0){ p.y = canvas.height + p.r; p.x = Math.random()*canvas.width; }
+        if(p.x < -10) p.x = canvas.width + 10;
+        if(p.x > canvas.width + 10) p.x = -10;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    window.addEventListener('resize', ()=>{ resizeCanvas(); initParticles(); });
+    resizeCanvas(); initParticles(); drawParticles();
+
+    /* ================== Auth modal UI ================== */
+    const modal = document.getElementById('modalBackdrop');
+    const openLogin = document.getElementById('openLogin');
+    const closeModal = document.getElementById('mClose');
+    openLogin.addEventListener('click', ()=> { modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); });
+    closeModal.addEventListener('click', ()=> { modal.style.display='none'; modal.setAttribute('aria-hidden','true'); });
+
+    // elements
+    const mLoginEmail = document.getElementById('mLoginEmail');
+    const mLoginPassword = document.getElementById('mLoginPassword');
+    const mLoginBtn = document.getElementById('mLoginBtn');
+
+    const mRegUsername = document.getElementById('mRegUsername');
+    const mRegEmail = document.getElementById('mRegEmail');
+    const mRegPassword = document.getElementById('mRegPassword');
+    const mRegAvatar = document.getElementById('mRegAvatar');
+    const mRegisterBtn = document.getElementById('mRegisterBtn');
+
+    const demoBtn = document.getElementById('demoBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const profileWidget = document.getElementById('profileWidget');
+    const navName = document.getElementById('navName');
+    const navAvatar = document.getElementById('navAvatar');
+
+    /* ================== Login / Register (modular) ================== */
+    mLoginBtn.addEventListener('click', async ()=> {
+      const email = mLoginEmail.value.trim();
+      const password = mLoginPassword.value;
+      if(!email || !password){ toast('Please enter email & password'); return; }
+      try{
+        await signInWithEmailAndPassword(auth, email, password);
+        modal.style.display = 'none';
+        toast('Logged in');
+      }catch(err){ toast(err.message); console.error(err); }
+    });
+
+    mRegisterBtn.addEventListener('click', async ()=> {
+      const displayName = mRegUsername.value.trim();
+      const email = mRegEmail.value.trim();
+      const password = mRegPassword.value;
+      const avatarFile = mRegAvatar.files && mRegAvatar.files[0];
+
+      if(!displayName || !email || !password){ toast('Fill name, email and password'); return; }
+      try
